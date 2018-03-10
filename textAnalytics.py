@@ -8,6 +8,7 @@ from pprint import pprint
 text_analytics_base_url = "https://northeurope.api.cognitive.microsoft.com/text/analytics/v2.0/"
 subscription_key = "56957c0c36d84eec8dfbef92cda9a57a"
 sentiment_api_url = text_analytics_base_url + "sentiment"
+#sentiment_api_url = text_analytics_base_url + "keyPhrases"
 print(sentiment_api_url)
 
 #Pre-processing
@@ -56,3 +57,8 @@ headers   = {"Ocp-Apim-Subscription-Key": subscription_key}
 response  = requests.post(sentiment_api_url, headers=headers, json=documents)
 sentiments = response.json()
 pprint(sentiments)
+
+outputFilePath = dir + "/sentiments_output.json"
+#outputFilePath = dir + "/key_phrases_output.json"
+with open(outputFilePath, "w") as outputfile:
+	json.dump(sentiments, outputfile)
